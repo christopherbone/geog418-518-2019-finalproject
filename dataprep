@@ -1,0 +1,28 @@
+#Data preparation for Final Project
+
+#Libraries
+library(sf)
+library(plyr)
+library(dplyr)
+library(spdep)
+library(GISTools)
+library(raster)
+library(maptools)
+library(rgdal)
+library(spatstat)
+library(sp)
+library(spatstat)
+library(tmap)
+library(gstat)
+
+
+#Set working directory
+setwd("/Users/...")
+
+#Reading in dissemination tract and income data
+income <- read.csv("Income.csv")     #Read in census income data  
+colnames(income) <- c("DAUID", "Income")     #Select only ID and Income columns
+census.tracts <- shapefile("BC_DA.shp")     #Read in dissemination tract shapefile
+income.tracts <- merge(census.tracts,income, by = "DAUID")     #Merge income and dissemination data
+nrow(income.tracts)    #Determine the number of columns in the dataframe
+income.tracts <- income.tracts[!is.na(income.tracts$Income),]    #Remove NA's
