@@ -1,0 +1,16 @@
+#These steps will help you combine the outputs from your spatial interpolation with your income data.
+
+#If you have too many cells, you can reduce the number by aggregating values
+step.1 <- aggregate(yourRasterFromKriging, fact=??, fun=mean)
+plot(step.1)
+
+#Convert the raster dataset to points
+step.2 <-  rasterToPoints(step.1,fun=NULL, spatial=FALSE, crs=AssignProjectionFromAnotherDataset)
+step.2 <- as.data.frame(step.2) #convert the point dataset to a spatial dataframe
+Coords <- step.2[,c("x", "y")]  #assign coordinates to a new object
+crs <- crs(census.tracts) #utilize an existing projection
+step.3 <- SpatialPointsDataFrame(coords = Coords, data = a, proj4string = crs) #create a spatial points dataframe
+step.4 <- aggregate(x=step.3,by=income.tracts, FUN=mean) #aggregate points into census tracts
+step.5 <- intersect(step.5,income.tracts)  #get the intersection of step.5 with the income.tracts dataset (this will take a while) 
+
+#You are now ready to perform a regression
