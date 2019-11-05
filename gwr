@@ -1,5 +1,7 @@
-  
 ####Geographically Weighted Regression
+
+#Let's say you are continuing with your data from the regression analysis. 
+
 #The first thing you need to do is to add the polygon coordinates to the spatialpolygondataframe.
 #You can obtain the coordinates using the "coordinates" function from the sp library
 pm.income.poly.coords <- sp::coordinates(pm.income.poly)
