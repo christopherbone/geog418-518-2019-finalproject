@@ -1,7 +1,0 @@
-# Create an empty grid where n is the total number of cells
-grd <- as.data.frame(spsample(spSample, "regular", n=5000))
-names(grd)       <- c("X", "Y")
-coordinates(grd) <- c("X", "Y")
-gridded(grd)     <- TRUE  # Create SpatialPixel object
-fullgrid(grd)    <- TRUE  # Create SpatialGrid object
-proj4string(grd) <- proj4string(spSample)
