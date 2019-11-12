@@ -51,7 +51,7 @@ head(postalcodes) #See what the data looks like in tabular form
 #Join PM2.5 data with postal code data
 pm25.spatial <- merge(postalcodes,pm25,by = "POSTALCODE")
 
-#Aggregate the PM2.5 values in each DA in order to have a single value per DA. Here we aggregate based on the mean.
+#Aggregate the PM2.5 values in each DA in order to have a single value per DA. Here we aggregate based on the max.
 pm25.aggregate <- aggregate((as.numeric(pm25.spatial$PM25)/10)~pm25.spatial$DAUID,FUN=max)
 
 #Re-join aggregated data to the income.tracts layer.
